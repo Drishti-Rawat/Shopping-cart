@@ -16,14 +16,15 @@ const CartSlice = createSlice({
     reducers: {
 
         addtocart : (state,action)=>{
-            const item = action.payload;
-            const itemExists = state.items.find(item => item.id === item.id);
-            if (itemExists) {
-                itemExists.quantity += 1;
-            } else {
-                item.quantity = 1;
-                state.items = [...state.items, item];
+            const newitem = action.payload;
+            const itemExists = state.items.find(item => item.id === newitem.id);
+            if(!itemExists) {
+                newitem.quantity = 1;
+                state.items = [...state.items, newitem];
             } 
+            else{
+                itemExists.quantity+=1
+            }
            
         },
         removefromCart : (state,action)=>{
