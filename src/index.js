@@ -3,11 +3,36 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import {
+  createBrowserRouter,
+  RouterProvider,
+} from "react-router-dom";
+import Category from './Page/Category';
+import CheckOut from './Page/CheckOut';
+import { Provider } from 'react-redux';
+import store from './Store/store';
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <App/>,
+  },
+  {
+    path: "/category/:categoryId",
+    element: <Category/>,
+  },
+  {
+    path: "/checkout",
+    element: <CheckOut/>,
+  },
+]);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <Provider store={store}>
+    <RouterProvider router={router} />
+    </Provider>
   </React.StrictMode>
 );
 

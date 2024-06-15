@@ -1,24 +1,23 @@
-import logo from './logo.svg';
-import './App.css';
+import CategoryCard from './components/CategoryCard';
+import categories from "./data/categories.json"
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <main className="App flex flex-col p-4 justify-center items-center ">
+      <h2 className='text-4xl text-black font-extrabold '>Shop by Category</h2>
+
+      <div className='flex p-4 gap-5 overflow-hidden '>
+        {
+          categories.map((items)=>(
+            <CategoryCard  categories={items}/>
+          ))
+        }
+        
+
+      </div>
+     
+    </main>
   );
 }
 
