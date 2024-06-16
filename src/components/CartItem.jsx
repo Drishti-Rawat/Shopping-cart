@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   addQuantity,
   removeQuantity,
@@ -8,18 +8,26 @@ import { useDispatch } from "react-redux";
 
 const CartItem = ({ product, onClick }) => {
   const { id, name, price, currency, thumbnail, quantity } = product;
+  const [totalPrice,setTotalPrice] = useState(price*quantity)
 
   const dispatch = useDispatch();
 
   const handleIncreasequantity = () => {
     dispatch(addQuantity({ id: id }));
-    dispatch(updateItemPrice({ id: id }));
   };
 
   const handledecressqunatity = () => {
     dispatch(removeQuantity({ id: id }));
-    dispatch(updateItemPrice({ id: id }));
+   
   };
+
+  const updatePrice = ()=>{
+    setTotalPrice(price*quantity)
+  }
+
+  useEffect(()=>{
+    updatePrice()
+  },[quantity])
 
   return (
     <main id={id} className="py-3 border bg-gray-100">
@@ -33,7 +41,7 @@ const CartItem = ({ product, onClick }) => {
 
         <div>
           <h2 className="text-lg font-semibold">
-            {price} {currency}
+            {totalPrice} {currency}
           </h2>
         </div>
 

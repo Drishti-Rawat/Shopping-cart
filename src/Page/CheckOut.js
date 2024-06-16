@@ -7,10 +7,11 @@ const CheckOut = () => {
   const cartItem = useSelector((state) => state.items);
   const dispatch = useDispatch();
   const [totalPrice, setTotalPrice] = useState(0);
+  console.log(cartItem)
 
   const calculateTotalPrice = () => {
     let total = 0;
-    cartItem ? cartItem.map((item) => (total += item.price)) : (total = 0);
+    cartItem ? cartItem.map((item) => (total += item.totalPrice)) : (total = 0);
     setTotalPrice(total);
   };
 
@@ -32,7 +33,7 @@ const CheckOut = () => {
       </div>
 
       <div className="">
-        {cartItem ? (
+        {cartItem && cartItem.length>0 ? (
           cartItem.map((item) => (
             <CartItem
               product={item}
@@ -48,7 +49,7 @@ const CheckOut = () => {
       </div>
 
       <div className="mt-6 px-3 py-3">
-        {cartItem ? (
+        {cartItem && cartItem.length>0 ? (
           <h2 className="text-3xl font-semibold">
             Total Price : {totalPrice} USD
           </h2>

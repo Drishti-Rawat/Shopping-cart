@@ -15,9 +15,7 @@ const store = configureStore({
 })
 
 store.subscribe(() => {
-    saveState({
-      cart: store.getState().cart // Save only the cart slice to localStorage
-    });
-  });
+  saveState(store.getState());
+});
 
 export default store
